@@ -7,22 +7,27 @@
     {% load static %}
     <!-- CSS -->
     <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'custom.css' %}" rel="stylesheet">
 </head>
 <body>
 <main>
     <div class="container">
         <header class="border-bottom">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <div class="fs-2 mb-3">
-                    <img src="{% static 'calculator.svg' %}" alt="Проект про математику" width="32" height="32"/>
-                    <span>Проект про математику</span>
-                </div>
             </a>
         </header>
         <div class="p-5 mb-4 bg-light rounded-3" id="title-box">
             <div class="container-fluid py-5">
-                <h1 class="display-1 fw-bold">{% block page-title %}{% endblock %}</h1>
-                <p class="col-md-8 fs-4">{% block page-lead %}{% endblock %}</p>
+                <img src = "{% static 'Germany.jpg' %}"  class="img-fluid">
+                <div class="text-overlay">
+                    <h1 class="display-1 fw-bold">{% block page-title %}{% endblock %}</h1>
+                    <p class="col-md-8 fs-4">{% block page-lead %}{% endblock %}</p>
+                    <a class="btn bg-transparent" href="#project-contents">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16" style="width:60px; height: 60px;">
+                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"></path>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
         {% block content %}{% endblock %}
