@@ -1,4 +1,4 @@
-from proj_maths.models import Terms, VerbsForms, Lists
+from proj_maths.models import Terms, VerbsForms, Lists, RandomWords
 def db_get_terms_for_table():
     terms = []
     for i, item in enumerate(Terms.objects.all()):
@@ -6,10 +6,10 @@ def db_get_terms_for_table():
     return terms
 def db_write_term(new_term, new_pos, new_definition):
     term = Terms(name=new_term, pos=new_pos, definition=new_definition, termauthor="user")
-    if new_pos.startswith('гл'):
-        verb = VerbsForms(verb=new_term, fid=term.id)
-        verb.save()
     term.save()
+    if new_pos.startswith('гл'):
+        verb = VerbsForms(verb=new_term, fid=term)
+        verb.save()
 def db_get_terms_stats():
     db_terms = len(Terms.objects.filter(termauthor="db"))
     user_terms = len(Terms.objects.filter(termauthor="user"))
@@ -94,3 +94,7 @@ def db_check_translations(terms, translations):
         else:
             results.append((False, Terms.objects.get(name=terms[i]).definition))
     return results
+
+def db_get_random_word():
+    item = RandomWords.objects.order_by('?').first()
+    return ((item.word, item.translation))

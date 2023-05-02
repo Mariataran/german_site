@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block page-lead %}
-    Посмотрите, как спрягаются добавленные Вами глаголы
+    Посмотрите, как спрягаются добавленные Вами глаголы. <br/>
+    <p><i>Случайное слово или фраза: {{ w }} - {{ tr }}</i></p>
 {% endblock %}
 
 {% block content %}
@@ -15,7 +16,6 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th scope="col" class="py-3">#</th>
                     <th scope="col" class="py-3">глагол</th>
                     <th scope="col" class="py-3">перевод</th>
                     <th scope="col" class="py-3">ich</th>

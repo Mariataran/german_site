@@ -1,11 +1,12 @@
 {% extends "base_page.html" %}
 
 {% block page-title %}
-Список терминов
+Список слов в словаре
 {% endblock %}
 
 {% block page-lead %}
-Все термины извлекаются из БД/файла и динамически вставляются в таблицу.
+Здесь представлены все слова вашего словаря.<br/>
+    <p><i>Случайное слово или фраза: {{ w }} - {{ tr }}</i></p>
 {% endblock %}
 
 {% block content %}
@@ -15,7 +16,7 @@
           <thead>
             <tr>
               <th scope="col" class="py-3">#</th>
-              <th scope="col" class="py-3">Термин</th>
+              <th scope="col" class="py-3">Слово</th>
               <th scope="col" class="py-3">Часть речи</th>
               <th scope="col" class="py-3">Описание</th>
             </tr>

@@ -127,6 +127,15 @@ class Lists(models.Model):
         db_table = 'lists'
 
 
+class RandomWords(models.Model):
+    word = models.TextField(blank=True, null=True)
+    translation = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = 'random_words'
+
+
 class Terms(models.Model):
     name = models.TextField(unique=True)
     definition = models.TextField()

@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'proj_maths.middleware.BasePageContextMiddleware'
 ]
 
 ROOT_URLCONF = 'proj_maths.urls'

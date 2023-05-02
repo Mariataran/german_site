@@ -2,13 +2,14 @@
 
 {% block page-title %}
 {% if success %}
-Термин добавлен
+Слово добавлено
 {% else %}
 Ошибка добавления
 {% endif %}
 {% endblock %}
 
-{% block page-lead %}{% endblock %}
+{% block page-lead %}<br/>
+    <p><i>Случайное слово или фраза: {{ w }} - {{ tr }}</i></p>{% endblock %}
 
 {% block content %}
 <div class="container-sm px-5 py-5" id="project-contents">

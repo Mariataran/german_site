@@ -4,16 +4,22 @@ from . import terms_work, terms_db
 
 
 def index(request):
-    return render(request, "index.html")
+    w, tr = terms_db.db_get_random_word()
+    context = {"w": w, "tr": tr}
+    return render(request, "index.html", context=context)
 
 
 def terms_list(request):
     terms = terms_db.db_get_terms_for_table()
-    return render(request, "term_list.html", context={"terms": terms})
+    w, tr = terms_db.db_get_random_word()
+    context = {"w": w, "tr": tr, "terms": terms}
+    return render(request, "term_list.html", context=context)
 
 
 def add_term(request):
-    return render(request, "term_add.html")
+    w, tr = terms_db.db_get_random_word()
+    context = {"w": w, "tr": tr}
+    return render(request, "term_add.html", context=context)
 
 
 def send_term(request):
@@ -23,7 +29,8 @@ def send_term(request):
         new_term = request.POST.get("new_term", "")
         new_pos = request.POST.get("pos")
         new_definition = request.POST.get("new_definition", "").replace(";", ",")
-        context = {"user": user_name}
+        w, tr = terms_db.db_get_random_word()
+        context = {"user": user_name, "w": w, "tr": tr}
         if len(new_definition) == 0:
             context["success"] = False
             context["comment"] = "Описание должно быть не пустым"
@@ -47,14 +54,16 @@ def show_stats(request):
 
 def add_list(request):
     terms = terms_db.db_get_terms_for_table()
-    return render(request, "list_add.html", context={"terms": terms})
+    w, tr = terms_db.db_get_random_word()
+    return render(request, "list_add.html", context={"terms": terms, "w": w, "tr": tr})
 
 def send_list(request):
     if request.method == "POST":
         cache.clear()
         list_name = request.POST.get("listName")
         checked_items = request.POST.getlist('items')
-        context = {}
+        w, tr = terms_db.db_get_random_word()
+        context = {"w": w, "tr": tr}
         if len(checked_items) == 0:
             context["success"] = False
             context["comment"] = f"Ваш список {list_name} не может быть пустым."
@@ -71,7 +80,8 @@ def send_list(request):
 
 def verb_add(request):
     terms = terms_db.db_get_verbs()
-    return render(request, "verb_add.html", context={"terms": terms})
+    w, tr = terms_db.db_get_random_word()
+    return render(request, "verb_add.html", context={"terms": terms, "w": w, "tr": tr})
 
 def choose_verb(request):
     if request.method == 'POST':
@@ -84,7 +94,8 @@ def choose_verb(request):
         skls.append(request.POST.get("ihr"))
         skls.append(request.POST.get("wir"))
         skls.append(request.POST.get("sie"))
-        context = {}
+        w, tr = terms_db.db_get_random_word()
+        context = {"w": w, "tr": tr}
         if verb in terms_db.db_get_verbs_names():
             context["success"] = True
             context["what"] = "получилось!"
@@ -101,17 +112,19 @@ def choose_verb(request):
 
 def show_verbs(request):
     verbs = terms_db.db_verb_conjs()
-    return render(request, "show_verbs.html", context={"verbs":verbs})
+    w, tr = terms_db.db_get_random_word()
+    return render(request, "show_verbs.html", context={"verbs":verbs, "w": w, "tr": tr})
 
 def show_lists(request):
     lists = terms_db.db_get_list_of_lists()
-    return render(request, "show_lists.html", context={"lists":lists})
+    w, tr = terms_db.db_get_random_word()
+    return render(request, "show_lists.html", context={"lists":lists, "w": w, "tr": tr})
 
 def show_one_list(request):
     if request.method == 'POST':
         list_name = request.POST.get("item")
-        print(list_name)
-        context = {"terms":terms_db.db_get_list(list_name)}
+        w, tr = terms_db.db_get_random_word()
+        context = {"terms":terms_db.db_get_list(list_name), "w": w, "tr": tr}
         context["listname"] = list_name
         return render(request, "show_one_list.html", context=context)
     else:
