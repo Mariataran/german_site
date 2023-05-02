@@ -26,5 +26,10 @@ urlpatterns = [
     path('add-list', views.add_list),
     path('send-list', views.send_list),
     path('verb-add', views.verb_add),
-    path('choose-verb', views.choose_verb)
+    path('choose-verb', views.choose_verb),
+    path('show-verbs', views.show_verbs),
+    path('show-lists', views.show_lists),
+    path('show-one-list', views.show_one_list),
+    path('test-list', views.test_list),
+    path('test-result', views.test_result)
 ]

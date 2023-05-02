@@ -8,57 +8,67 @@
 
 {% block content %}
     <div class="container marketing" id="project-contents">
-        <div class="row featurette">
+        <div class="row featurette mt-5">
             <div class="col-md-7 order-md-2">
-                <h2 class="featurette-heading fw-normal lh-1">Oh yeah, it’s that good. <span
+                <h2 class="featurette-heading fw-normal lh-1">Как спрягать глаголы? <span
                         class="text-body-secondary">See for yourself.</span></h2>
-                <p class="lead">В таблице слева показано, как спрягаются глаголы в немецком языке.</p>
+                <p class="lead">В таблице слева показано, как спрягаются глаголы в немецком языке. Общее правило такое:</p>
+                <ul>
+                    <li> от инфинитива отнимается окончание -en</li>
+                    <li> к местоимению ich добавляется окончание -e</li>
+                    <li> к местоимению du добавляется окончание -st</li>
+                    <li> к местоимениям er/sie(она)/es добавляется окончание -t</li>
+                    <li> к местоимению ihr добавляется окончание -t</li>
+                    <li> к местоимению wir/sie(они)/Sie добавляется окончание -en</li>
+                </ul>
             </div>
             <div class="col-md-5 order-md-1">
-                <img src="{% static 'conjugation.png' %}" class="img-fluid">
+                <div class="image-container">
+                    <img src="{% static 'conjugation.png' %}" class="img-fluid">
+                </div>
             </div>
         </div>
-        <div class="row featurette">
-                <form method="post" action="/choose-verb">
-                    <!-- Three columns of text below the carousel -->
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <h2 class="fw-normal">Напишите глагол</h2>
-                            <input type="text" class="form-control input-lg" name="verb" id="verb">
-                        </div><!-- /.col-lg-4 -->
-                        <div class="col-lg-4">
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col" class="py-3">ich</th>
-                                        <th scope="col" class="py-3">du</th>
-                                        <th scope="col" class="py-3">er</th>
-                                        <th scope="col" class="py-3">ihr</th>
-                                        <th scope="col" class="py-3">wir</th>
-                                        <th scope="col" class="py-3">sie</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td><input type="text" name="ich" id="ich"></td>
-                                        <td><input type="text" name="du" id="du"></td>
-                                        <td><input type="text" name="er" id="er"></td>
-                                        <td><input type="text" name="ihr" id="ihr"></td>
-                                        <td><input type="text" name="wir" id="wir"></td>
-                                        <td><input type="text" name="sie" id="sie"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div><!-- /.col-lg-4 -->
-                        <div class="col-lg-4">
-                            <button class="btn btn-outline-info" href="/choose-verb" type="submit">
-                                Готово
-                            </button>
-                        </div><!-- /.col-lg-4 -->
-                    </div><!-- /.row -->
-                </form>
+        <div class="row featurette my-lg-5">
+            <form method="post" action="/choose-verb">
+                <!-- Three columns of text below the carousel -->
+                <div class="row">
+                    <div class="col-lg-4">
+                        <h2 class="fw-normal">Напишите глагол</h2>
+                        <input type="text" class="form-control input-lg" name="verb" id="verb">
+                    </div><!-- /.col-lg-4 -->
+                    <div class="col-lg-4">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="py-3">ich</th>
+                                    <th scope="col" class="py-3">du</th>
+                                    <th scope="col" class="py-3">er</th>
+                                    <th scope="col" class="py-3">ihr</th>
+                                    <th scope="col" class="py-3">wir</th>
+                                    <th scope="col" class="py-3">sie</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><input type="text" name="ich" id="ich"></td>
+                                    <td><input type="text" name="du" id="du"></td>
+                                    <td><input type="text" name="er" id="er"></td>
+                                    <td><input type="text" name="ihr" id="ihr"></td>
+                                    <td><input type="text" name="wir" id="wir"></td>
+                                    <td><input type="text" name="sie" id="sie"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /.col-lg-4 -->
+                    <div class="col-lg-4">
+                        <button class="btn btn-outline-info" href="/choose-verb" type="submit">
+                            Готово
+                        </button>
+                    </div><!-- /.col-lg-4 -->
+                </div><!-- /.row -->
+            </form>
         </div>
     </div>
 {% endblock %}

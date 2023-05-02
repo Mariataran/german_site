@@ -85,10 +85,10 @@ def choose_verb(request):
         skls.append(request.POST.get("wir"))
         skls.append(request.POST.get("sie"))
         context = {}
-        if verb in terms_db.db_get_verbs():
+        if verb in terms_db.db_get_verbs_names():
             context["success"] = True
             context["what"] = "получилось!"
-            context["comment"] = "Вы успешно склонили глагол!"
+            context["comment"] = "Вы успешно проспрягали глагол!"
             terms_db.db_add_declension(verb, skls)
             return render(request, "verb_request.html", context=context)
         else:
@@ -99,4 +99,49 @@ def choose_verb(request):
     else:
         return verb_add(request)
 
+def show_verbs(request):
+    verbs = terms_db.db_verb_conjs()
+    return render(request, "show_verbs.html", context={"verbs":verbs})
 
+def show_lists(request):
+    lists = terms_db.db_get_list_of_lists()
+    return render(request, "show_lists.html", context={"lists":lists})
+
+def show_one_list(request):
+    if request.method == 'POST':
+        list_name = request.POST.get("item")
+        print(list_name)
+        context = {"terms":terms_db.db_get_list(list_name)}
+        context["listname"] = list_name
+        return render(request, "show_one_list.html", context=context)
+    else:
+        show_lists(request)
+
+def test_list(request):
+    if request.method == 'POST':
+        list_name = request.POST.get("listname")
+        terms = terms_db.db_get_terms_of_list_only(list_name)
+        context = {"terms":terms}
+        return render(request, "test_list.html", context=context)
+    else:
+        show_one_list(request)
+
+def test_result(request):
+    if request.method == 'POST':
+        translations = request.POST.getlist("translations")
+        terms = request.POST.getlist("terms")
+        res = terms_db.db_check_translations(terms, translations)
+        right_answers = 0
+        wrong_answers = 0
+        for r in res:
+            if r[0]:
+                right_answers += 1
+            else:
+                wrong_answers += 1
+        to_unzip = []
+        for i in range(len(terms)):
+            to_unzip.append([terms[i], translations[i], res[i][0], res[i][1]])
+        context = {"items":to_unzip, "right":right_answers, "all":len(res)}
+        return render(request, "test_result.html", context=context)
+    else:
+        test_list(request)

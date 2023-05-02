@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'custom.css' %}" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+<!-- Begin page content -->
+<main class="flex-shrink-0">
+  <div class="container">
+    <h1 class="mt-5">Впишите перевод:</h1>
+    <form method="post" action="/test-result">
+        {% for term in terms %}
+        <div class="row">
+              <div class="col-md-6 mb-3">
+                <p>{{ term }}</p>
+              </div>
+              <div class="col-md-6 mb-3">
+                  <input type="hidden" name="terms" id="terms" value="{{ term|safe }}">
+                <input type="text" class="form-control" id="translations" name="translations" placeholder="" value="" required="">
+              </div>
+            </div>
+        {% endfor %}
+    <button class="btn btn-outline-info" type="submit" href="/test-result">Проверить</button>
+    </form>
+  </div>
+</main>
+</body>
+</html>

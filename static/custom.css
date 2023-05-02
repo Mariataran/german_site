@@ -24,3 +24,13 @@
     top: 130%;
     transform: translate(-50%, -50%);
 }
+
+.image-container{
+    border:2px solid black;
+    padding: 10px;
+}
+
+.image-container img{
+    max-width: 100%;
+    height: auto;
+}

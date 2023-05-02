@@ -1,37 +1,49 @@
 {% extends "base_page.html" %}
 
 {% block page-title %}
-Склонения глаголов
+    Спряжения глаголов
 {% endblock %}
 
 {% block page-lead %}
-Все термины извлекаются из БД/файла и динамически вставляются в таблицу.
+    Посмотрите, как спрягаются добавленные Вами глаголы
 {% endblock %}
 
 {% block content %}
-<div class="container px-4 py-5" id="project-contents">
+    <div class="container px-4 py-5" id="project-contents">
 
-    <div class="table-responsive">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col" class="py-3">#</th>
-              <th scope="col" class="py-3">Термин</th>
-              <th scope="col" class="py-3">Часть речи</th>
-              <th scope="col" class="py-3">Описание</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for cnt, term, pos, definition in terms %}
-            <tr>
-                <td class="py-3">{{ cnt }}</td>
-                <td class="py-3">{{ term }}</td>
-                <td class="py-3">{{ pos }}</td>
-                <td class="py-3">{{ definition }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-</div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col" class="py-3">#</th>
+                    <th scope="col" class="py-3">глагол</th>
+                    <th scope="col" class="py-3">перевод</th>
+                    <th scope="col" class="py-3">ich</th>
+                    <th scope="col" class="py-3">du</th>
+                    <th scope="col" class="py-3">er/sie/es</th>
+                    <th scope="col" class="py-3">ihr</th>
+                    <th scope="col" class="py-3">wir</th>
+                    <th scope="col" class="py-3">Sie/sie</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for verb, translate, ich, du, er, ihr, wir, Sie in verbs %}
+                    <tr>
+                        <td class="py-3">{{ verb }}</td>
+                        <td class="py-3">{{ translate }}</td>
+                        <td class="py-3">{{ ich }}</td>
+                        <td class="py-3">{{ du }}</td>
+                        <td class="py-3">{{ er }}</td>
+                        <td class="py-3">{{ ihr }}</td>
+                        <td class="py-3">{{ wir }}</td>
+                        <td class="py-3">{{ Sie }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p><a class="btn btn-outline-info" href="/" role="button">
+            На главную</a>
+        </p>
+    </div>
 {% endblock %}
