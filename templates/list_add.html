@@ -23,15 +23,17 @@
             <tr>
               <th scope="col" class="py-3">#</th>
               <th scope="col" class="py-3">Термин</th>
+              <th scope="col" class="py-3">Часть речи</th>
               <th scope="col" class="py-3">Описание</th>
               <th scope="col" class="py-3"></th>
             </tr>
           </thead>
           <tbody>
-            {% for cnt, term, definition in terms %}
+            {% for cnt, term, pos, definition in terms %}
             <tr>
                 <td class="py-3">{{ cnt }}</td>
                 <td class="py-3">{{ term }}</td>
+                <td class="py-3">{{ pos }}</td>
                 <td class="py-3">{{ definition }}</td>
                 <td class="py-3">
                     <input class="form-check-input me-1" type="checkbox" name= 'items' id="items" value={{ cnt }} aria-label="...">
@@ -39,7 +41,7 @@
             {% endfor %}
           </tbody>
         </table>
-        <button type=submit class="btn btn-secondary" formaction="/send-list">Готово</button>
+        <button type=submit class="btn btn-outline-info" formaction="/send-list">Готово</button>
       </div>
         </form>
       </div>

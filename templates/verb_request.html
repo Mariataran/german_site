@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'custom.css' %}" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+<!-- Begin page content -->
+<main class="flex-shrink-0">
+  <div class="container">
+    <h1 class="mt-5">Склонить {{ what }}</h1>
+    <p class="lead">{{ comment}}</p>
+    {% if success == False %} <a class="btn btn-secondary" href="/add-term">Добавить слово в словарь</a>
+    {% else %} <a class="btn btn-outline-info" href="/">На главную</a> {% endif %}
+  </div>
+</main>
+</body>
+</html>

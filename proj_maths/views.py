@@ -21,6 +21,7 @@ def send_term(request):
         cache.clear()
         user_name = request.POST.get("name")
         new_term = request.POST.get("new_term", "")
+        new_pos = request.POST.get("pos")
         new_definition = request.POST.get("new_definition", "").replace(";", ",")
         context = {"user": user_name}
         if len(new_definition) == 0:
@@ -32,7 +33,7 @@ def send_term(request):
         else:
             context["success"] = True
             context["comment"] = "Ваш термин принят"
-            terms_db.db_write_term(new_term, new_definition)
+            terms_db.db_write_term(new_term, new_pos, new_definition)
         if context["success"]:
             context["success-title"] = ""
         return render(request, "term_request.html", context)
@@ -68,5 +69,34 @@ def send_list(request):
     else:
         add_list(request)
 
-def learn(request):
-    return render(request, "learn.html")
+def verb_add(request):
+    terms = terms_db.db_get_verbs()
+    return render(request, "verb_add.html", context={"terms": terms})
+
+def choose_verb(request):
+    if request.method == 'POST':
+        cache.clear()
+        verb = request.POST.get("verb")
+        skls = []
+        skls.append(request.POST.get("ich"))
+        skls.append(request.POST.get("du"))
+        skls.append(request.POST.get("er"))
+        skls.append(request.POST.get("ihr"))
+        skls.append(request.POST.get("wir"))
+        skls.append(request.POST.get("sie"))
+        context = {}
+        if verb in terms_db.db_get_verbs():
+            context["success"] = True
+            context["what"] = "получилось!"
+            context["comment"] = "Вы успешно склонили глагол!"
+            terms_db.db_add_declension(verb, skls)
+            return render(request, "verb_request.html", context=context)
+        else:
+            context["success"] = False
+            context["what"] = "не получилось("
+            context["comment"] = "Здорово, конечно, но такого глагола в списке нет)."
+            return render(request, "verb_request.html", context=context)
+    else:
+        return verb_add(request)
+
+
